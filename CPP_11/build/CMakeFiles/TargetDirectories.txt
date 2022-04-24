@@ -1,0 +1,3 @@
+/home/lee/cpp_program_tips/CPP_11/build/CMakeFiles/rebuild_cache.dir
+/home/lee/cpp_program_tips/CPP_11/build/CMakeFiles/test.dir
+/home/lee/cpp_program_tips/CPP_11/build/CMakeFiles/edit_cache.dir
