@@ -26,7 +26,7 @@ int main()
     int range = 0;
     
     //记录用户的输入：是否包含乘除法
-    int multi_divi_flag = 0;
+    char multi_divi_flag = '\0';
 
     // 根据用户输入，得到随机的计算符号
     int state_num ;
@@ -43,19 +43,22 @@ int main()
     // 以时间作为随机数种子，确保每次运行的伪随机数子不一样；
     std::srand( (unsigned)time( NULL ) );  
     
-    //用户交互 设置计算参数
-    std::cout<<"please setting the numner: ";
+    //用户交互 设置计算参数,输入字符非法检测
+    std::cout<<"please setting the number: (int)";
     std::cin>>calculate_num;
+    if( ! std::cin.good() ){ std::cout<< "input type invaid!!! "<<std::endl; return 0; }
     
     std::cout<<"please setting the range: ";
     std::cin>>range;
+    if( ! std::cin.good() ){ std::cout<< "input type invaid!!! "<<std::endl; return 0; }
 
-    std::cout<<"please conform whether multiplication and division ard included: \nInput 0 or 1 :";
+    std::cout<<"please conform whether multiplication and division ard included: \nInput 'y' or 'n' :";
     std::cin>>multi_divi_flag;
-
+    if( ! std::cin.good() ){ std::cout<< "input type invaid!!! "<<std::endl; return 0; }
+   
     // 判断是否 含有乘除运算 
-    if( multi_divi_flag == 0 ) { state_num = 2 ; }
-    else if( multi_divi_flag == 1 ) { state_num = 4; }
+    if( multi_divi_flag == 'n' ) { state_num = 2 ; }
+    else if( multi_divi_flag == 'y' ) { state_num = 4; }
     else{ std::cout<<"input error: "<<std::endl;  return 0; }
 
     std::cout<<"Ready to Starts: \n"<<std::endl;
@@ -81,6 +84,8 @@ int main()
                 std::cout<<i+1<<": "<<num1 <<" * "<<num2<<" = ";
                 break;
             case 3:
+                // 检测分母为 0 的非法情况
+                if(num2 == 0) { continue; }
                 real_sum = num1 / num2  ;
                 std::cout<<i+1<<": "<<num1 <<" / "<<num2<<" = ";
                 break;
@@ -112,14 +117,17 @@ int main()
     }
 
     // 统计结果，向终端打印输出。
-    average_cost_time /= calculate_num ; 
-    std::cout<<"\n ********** the result below *************** \n"
-             <<"Total pratice num: "<<calculate_num<<"\n"
-             <<"answer_right num: "<<answer_right_num<<"\n"
-             <<"answer_error_num: "<<answer_error_num<<"\n"
-             <<"average_cost_time_ms: "<<average_cost_time<<" ms"<<"\n"
-             <<"min_cost_time_ms: "<<min_cost_time_ms<<" ms"<<"\n"
-             <<"*********************************************** "<<std::endl ;
-             
+    if( i == calculate_num && i != 0)
+    {
+        average_cost_time /= calculate_num ; 
+        std::cout<<"\n ********** the result below *************** \n"
+                 <<"Total pratice num: "<<calculate_num<<"\n"
+                 <<"answer_right num: "<<answer_right_num<<"\n"
+                 <<"answer_error_num: "<<answer_error_num<<"\n"
+                 <<"average_cost_time_ms: "<<average_cost_time<<" ms"<<"\n"
+                 <<"min_cost_time_ms: "<<min_cost_time_ms<<" ms"<<"\n"
+                 <<"*********************************************** "<<std::endl ;
+
+    }        
     return 0;
 }
