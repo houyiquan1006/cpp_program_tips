@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/cooneo/cpp_program_tips/深蓝学院C++课程/chapter4/example1/test1.cpp
+iostream
+-
+type_traits
+-
+
